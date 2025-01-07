@@ -1,5 +1,5 @@
 <template>
-  <svg>
+  <svg viewBox="0 0 38 24" width="38" height="24">
     <path
       fill="#000"
       opacity=".07"

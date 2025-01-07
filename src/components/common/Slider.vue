@@ -101,7 +101,7 @@ export default defineComponent({
 
 .carousel-description {
   margin: 0.5rem 0;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .arrow-btn {
@@ -128,10 +128,15 @@ export default defineComponent({
   margin-left: 0.25rem;
 }
 
+.carousel__pagination {
+  bottom: -25px;
+}
+
 .carousel__pagination-button::after {
-  background-color: #acacac;
+  background-color: #c5c5c5;
   border-radius: 30%;
   width: 12px;
+  height: 5px;
 }
 .carousel__pagination-button--active::after {
   background-color: #570df8;
@@ -140,7 +145,7 @@ export default defineComponent({
 }
 
 .carousel__pagination-button:hover::after {
-  background-color: #acacac;
+  background-color: #c5c5c5;
 }
 .carousel__pagination-button--active:hover::after {
   background-color: #570df8;
