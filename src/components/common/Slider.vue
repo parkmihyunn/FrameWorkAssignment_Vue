@@ -79,7 +79,7 @@ export default defineComponent({
 <style>
 .wrapper,
 .carousel__item {
-  max-height: 244px;
+  max-height: 220px;
 }
 
 .carousel-text {
