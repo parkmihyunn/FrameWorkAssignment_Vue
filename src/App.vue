@@ -9,6 +9,8 @@ if (localStorage.getItem("dark") === "true") {
 if (localStorage.getItem("dark") === "false") {
   $htmlEl.classList.remove("dark");
 }
+
+window.localStorage.setItem("totalCount", "0");
 </script>
 
 <template>

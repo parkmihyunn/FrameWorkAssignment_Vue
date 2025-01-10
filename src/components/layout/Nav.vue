@@ -14,6 +14,33 @@ const forceRerender = () => {
   componentKey.value += 1;
 };
 
+const cartCount = ref(0);
+document.addEventListener("click", (e) => {
+  if (
+    e.target.classList.contains("cart-btn") ||
+    e.target.classList.contains("add-cart")
+  ) {
+    cartCount.value = Object.keys(
+      JSON.parse(window.localStorage.cart).items
+    ).reduce(
+      (acc, cur) =>
+        (acc += JSON.parse(window.localStorage.cart).items[cur].count),
+      0
+    );
+    forceRerender();
+  }
+});
+
+if (window.localStorage.cart !== undefined) {
+  cartCount.value = Object.keys(
+    JSON.parse(window.localStorage.cart).items
+  ).reduce(
+    (acc, cur) =>
+      (acc += JSON.parse(window.localStorage.cart).items[cur].count),
+    0
+  );
+}
+
 onMounted(async () => {
   await store.fetchContents();
   contents = store.contents;
@@ -106,7 +133,7 @@ const onChange = (event) => {
         </svg>
       </button>
       <div class="">
-        <div class="searchIcon min-[530px]:hidden flex">
+        <div class="min-[530px]:hidden flex">
           <button @click="openSearch" class="searchIcon w-6 h-6 mr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +189,11 @@ const onChange = (event) => {
         href="/cart"
         class="p-1.5 rounded-md hover:bg-gray-300 hover:transition-all hover:duration-300"
       >
-        <div class="cart-icon items-center justify-center text-white text-xs">
-          {{ cartNum }}
+        <div
+          class="cart-icon items-center justify-center text-white text-xs"
+          :key="componentKey"
+        >
+          {{ cartCount }}
         </div>
         <div class="w-7 h-7">
           <svg
@@ -188,22 +218,21 @@ const onChange = (event) => {
 <script>
 const category = Object.entries(MENUS);
 
+document.addEventListener("click", (e) => isClickedHamburger(e));
 const isClickedHamburger = (e) => {
   const $sideBarEl = document.querySelector(".sideBar-div");
   e.target.classList.contains("hamburger")
     ? $sideBarEl.classList.remove("hidden")
     : "";
-  document.removeEventListener("click", (e) => isClickedHamburger(e));
 };
 
+document.addEventListener("click", (e) => openSearch(e));
 const openSearch = (e) => {
+  const $searchEl = document.querySelector(".hidden-search");
   e.target.classList.contains("searchIcon")
-    ? document.querySelector(".hidden-search").classList.toggle("hidden")
+    ? $searchEl.classList.remove("hidden")
     : "";
 };
-
-document.addEventListener("click", (e) => isClickedHamburger(e));
-document.addEventListener("click", (e) => openSearch(e));
 
 export default {
   data: () => {

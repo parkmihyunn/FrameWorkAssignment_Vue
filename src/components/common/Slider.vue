@@ -41,10 +41,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper lg:h-44">
     <Carousel :autoplay="3000" :wrap-around="true">
       <Slide v-for="slide in slides" :key="slide">
-        <div class="carousel__item">
+        <div class="carousel__item lg:h-44">
           <div class="carousel-text">
             <h2 class="carousel-caption">
               {{ slide.caption }}
@@ -79,7 +79,7 @@ export default defineComponent({
 <style>
 .wrapper,
 .carousel__item {
-  max-height: 220px;
+  height: 220px;
 }
 
 .carousel-text {
@@ -149,5 +149,16 @@ export default defineComponent({
 }
 .carousel__pagination-button--active:hover::after {
   background-color: #570df8;
+}
+
+@media (min-width: 1024px) {
+  .wrapper,
+  .carousel__item {
+    height: 700px;
+  }
+
+  .carousel-text {
+    bottom: 40%;
+  }
 }
 </style>

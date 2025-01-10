@@ -2759,6 +2759,9 @@ html {
 .grid-flow-col {
   grid-auto-flow: column;
 }
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 .flex-col {
   flex-direction: column;
 }
@@ -2779,6 +2782,9 @@ html {
 }
 .gap-6 {
   gap: 1.5rem;
+}
+.gap-64 {
+  gap: 16rem;
 }
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
@@ -2808,6 +2814,9 @@ html {
 }
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
 }
 .whitespace-normal {
   white-space: normal;
@@ -2919,6 +2928,9 @@ html {
 }
 .pt-6 {
   padding-top: 1.5rem;
+}
+.pb-20 {
+  padding-bottom: 5rem;
 }
 .text-left {
   text-align: left;
@@ -3300,6 +3312,12 @@ body {
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+  .md\:gap-6 {
+    gap: 1.5rem;
+  }
+  .md\:overflow-x-hidden {
+    overflow-x: hidden;
   }
 }
 @media (min-width: 1025px) {

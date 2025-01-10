@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useDataStore } from "../store/products";
+import { useCart } from "../store/cart";
 
 let path = window.location.pathname.slice(9);
 
@@ -16,29 +17,31 @@ const rate = ref(0);
 const empty = ref(0);
 const half = ref(false);
 
+const cart = useCart();
+
 onMounted(async () => {
   await store.fetchContents();
-  item.value = store.contents[path];
+  item.value = store.contents[path - 1];
   if (
-    store.contents[path].category === "women's clothing" ||
-    store.contents[path].category === "men's clothing"
+    store.contents[path - 1].category === "women's clothing" ||
+    store.contents[path - 1].category === "men's clothing"
   ) {
     category.value = "패션";
   }
-  if (store.contents[path].category === "jewelery") {
+  if (store.contents[path - 1].category === "jewelery") {
     category.value = "액세서리";
   }
-  if (store.contents[path].category === "electronics") {
+  if (store.contents[path - 1].category === "electronics") {
     category.value = "디지털";
   }
 
-  Math.ceil(store.contents[path].rating.rate) ===
-  Math.round(store.contents[path].rating.rate)
+  Math.ceil(store.contents[path - 1].rating.rate) ===
+  Math.round(store.contents[path - 1].rating.rate)
     ? (half.value = true)
     : "";
 
-  rate.value = Math.floor(store.contents[path].rating.rate);
-  empty.value = 5 - Math.ceil(store.contents[path].rating.rate);
+  rate.value = Math.floor(store.contents[path - 1].rating.rate);
+  empty.value = 5 - Math.ceil(store.contents[path - 1].rating.rate);
   forceRerender();
 });
 </script>
@@ -145,7 +148,12 @@ onMounted(async () => {
             ${{ item ? Math.round(item.price) : "" }}
           </p>
           <div class="card-actions">
-            <button class="btn btn-primary">장바구니에 담기</button>
+            <button
+              class="add-cart btn btn-primary"
+              @click="cart.addItem(cart.items, item.id)"
+            >
+              장바구니에 담기
+            </button>
             <a href="/cart" class="btn btn-outline ml-1 dark:text-white">
               장바구니로 이동
             </a>

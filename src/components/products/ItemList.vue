@@ -67,7 +67,7 @@
 
 <template :key="componentKey">
   <h2 class="mb-5 lg:mb-8 text-3xl lg:text-4xl text-center font-bold">{{category}}</h2>
-  <div class="cards-wrapper overflow-x-auto grid gap-6 md:grid-cols-2 lg:grid-cols-4 item_list ">
+  <div class="cards-wrapper grid grid-cols-4 overflow-x-scroll gap-64 md:gap-6 md:overflow-x-hidden md:grid-cols-2 lg:grid-cols-4 item_list">
     <a
       v-if="main"
       v-for="el in items"
